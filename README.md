@@ -1,3 +1,3 @@
 # oh-my-zsh-theme-arrows
 
-A mixture theme between bullet-train and agnoster
+A mixed theme of bullet-train and agnoster

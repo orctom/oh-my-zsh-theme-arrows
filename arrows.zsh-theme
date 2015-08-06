@@ -104,9 +104,6 @@ fi
 if [ ! -n "${ARROWS_GIT_FG_DIRTY+1}" ]; then
   ARROWS_GIT_FG_DIRTY=black
 fi
-if [ ! -n "${ARROWS_GIT_EXTENDED+1}" ]; then
-  ARROWS_GIT_EXTENDED=true
-fi
 
 # CONTEXT
 if [ ! -n "${ARROWS_CONTEXT_SHOW+1}" ]; then
@@ -141,22 +138,22 @@ else
   ZSH_THEME_GIT_PROMPT_CLEAN=$ARROWS_GIT_CLEAN
 fi
 if [ ! -n "${ARROWS_GIT_ADDED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_ADDED=" %F{green}✚%F{black}"
+  ZSH_THEME_GIT_PROMPT_ADDED=" %F{black}✚%F{black}"
 else
   ZSH_THEME_GIT_PROMPT_ADDED=$ARROWS_GIT_ADDED
 fi
 if [ ! -n "${ARROWS_GIT_MODIFIED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_MODIFIED=" %F{blue}●%F{black}"
+  ZSH_THEME_GIT_PROMPT_MODIFIED=" %F{black}●%F{black}"
 else
   ZSH_THEME_GIT_PROMPT_MODIFIED=$ARROWS_GIT_MODIFIED
 fi
 if [ ! -n "${ARROWS_GIT_DELETED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_DELETED=" %F{blue}✖%F{black}"
+  ZSH_THEME_GIT_PROMPT_DELETED=" %F{black}✖%F{black}"
 else
   ZSH_THEME_GIT_PROMPT_DELETED=$ARROWS_GIT_DELETED
 fi
 if [ ! -n "${ARROWS_GIT_UNTRACKED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{blue}⚑%F{black}"
+  ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{black}⚑%F{black}"
 else
   ZSH_THEME_GIT_PROMPT_UNTRACKED=$ARROWS_GIT_UNTRACKED
 fi
@@ -228,15 +225,10 @@ prompt_end() {
 # ------------------------------------------------------------------------------
 
 # Context: user@hostname (who am I and where am I)
-context() {
-  local user="$(whoami)"
-  [[ "$user" != "$ARROWS_CONTEXT_DEFAULT_USER" || -n "$ARROWS_IS_SSH_CLIENT" ]] && echo -n "${user}@%m"
-}
 prompt_context() {
-  [[ $ARROWS_CONTEXT_SHOW == false ]] && return
-
-  local _context="$(context)"
-  [[ -n "$_context" ]] && prompt_segment $ARROWS_CONTEXT_BG $ARROWS_CONTEXT_FG "$_context"
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment $ARROWS_CONTEXT_BG $ARROWS_CONTEXT_FG "%(!.%{%F{yellow}%}.)$USER@%m"
+  fi
 }
 
 # Git
@@ -256,11 +248,7 @@ prompt_git() {
       prompt_segment $ARROWS_GIT_BG $ARROWS_GIT_FG
     fi
 
-    if [[ $ARROWS_GIT_EXTENDED == true ]] then
-      echo -n $(git_prompt_info)$(git_prompt_status)
-    else
-      echo -n $(git_prompt_info)
-    fi
+    echo -n $(git_prompt_info)$(git_prompt_status)
   fi
 }
 
