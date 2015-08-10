@@ -242,7 +242,7 @@ prompt_git() {
 
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
     dirty=$(parse_git_dirty)
-    if [[ -n $dirty ]]; then
+    if [[ $dirty == $ZSH_THEME_GIT_PROMPT_DIRTY ]]; then
       prompt_segment $ARROWS_GIT_BG_DIRTY $ARROWS_GIT_FG_DIRTY
     else
       prompt_segment $ARROWS_GIT_BG $ARROWS_GIT_FG
