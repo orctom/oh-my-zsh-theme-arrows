@@ -389,5 +389,5 @@ build_prompt() {
   prompt_end
 }
 
-PROMPT='%{%f%b%k%}$(build_prompt)
+PROMPT='%{%f%b%k%}$(build_prompt)%{${fg_bold[default]}%}
 %{${fg_bold[default]}%}$(prompt_char) %{$reset_color%}'
