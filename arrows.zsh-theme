@@ -46,7 +46,7 @@ if [ ! -n "${ARROWS_VIRTUALENV_BG+1}" ]; then
   ARROWS_VIRTUALENV_BG=yellow
 fi
 if [ ! -n "${ARROWS_VIRTUALENV_FG+1}" ]; then
-  ARROWS_VIRTUALENV_FG=white
+  ARROWS_VIRTUALENV_FG=black
 fi
 if [ ! -n "${ARROWS_VIRTUALENV_PREFIX+1}" ]; then
   ARROWS_VIRTUALENV_PREFIX=🐍
