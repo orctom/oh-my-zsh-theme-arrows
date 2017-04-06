@@ -20,11 +20,14 @@ fi
 if [ ! -n "${ARROWS_STATUS_BG+1}" ]; then
   ARROWS_STATUS_BG=green
 fi
+if [ ! -n "${ARROWS_STATUS_FG+1}" ]; then
+  ARROWS_STATUS_FG=black
+fi
 if [ ! -n "${ARROWS_STATUS_ERROR_BG+1}" ]; then
   ARROWS_STATUS_ERROR_BG=red
 fi
-if [ ! -n "${ARROWS_STATUS_FG+1}" ]; then
-  ARROWS_STATUS_FG=white
+if [ ! -n "${ARROWS_STATUS_ERROR_FG+1}" ]; then
+  ARROWS_STATUS_ERROR_FG=white
 fi
 
 # TIME
@@ -358,7 +361,7 @@ prompt_status() {
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="⚙"
 
   if [[ -n "$symbols" && $RETVAL -ne 0 ]] then
-    prompt_segment $ARROWS_STATUS_ERROR_BG $ARROWS_STATUS_FG "$symbols"
+    prompt_segment $ARROWS_STATUS_ERROR_BG $ARROWS_STATUS_ERROR_FG "$symbols"
   elif [[ -n "$symbols" ]] then
     prompt_segment $ARROWS_STATUS_BG $ARROWS_STATUS_FG "$symbols"
   fi
