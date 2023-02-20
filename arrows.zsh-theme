@@ -34,10 +34,10 @@ if [ ! -n "${ARROWS_TIME_SHOW+1}" ]; then
   ARROWS_TIME_SHOW=true
 fi
 if [ ! -n "${ARROWS_TIME_BG+1}" ]; then
-  ARROWS_TIME_BG=white
+  ARROWS_TIME_BG=black
 fi
 if [ ! -n "${ARROWS_TIME_FG+1}" ]; then
-  ARROWS_TIME_FG=black
+  ARROWS_TIME_FG=green
 fi
 
 # VIRTUALENV
@@ -290,7 +290,7 @@ prompt_time() {
     return
   fi
 
-  prompt_segment $ARROWS_TIME_BG $ARROWS_TIME_FG %D{%H:%M:%S}
+  prompt_segment $ARROWS_TIME_BG $ARROWS_TIME_FG '%D{[%H:%M:%S]}'
 }
 
 # Status:
