@@ -256,10 +256,10 @@ prompt_git() {
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
     ref="◈ $(command git describe --exact-match --tags HEAD 2> /dev/null)" || \
     ref="➦ $(command git rev-parse --short HEAD 2> /dev/null)"
-    if [[ -n $dirty ]]; then
-      prompt_segment $ARROWS_GIT_BG_DIRTY $ARROWS_GIT_FG_DIRTY
-    else
+    if [[ $dirty = $ZSH_THEME_GIT_PROMPT_CLEAN ]]; then
       prompt_segment $ARROWS_GIT_BG $ARROWS_GIT_FG
+    else
+      prompt_segment $ARROWS_GIT_BG_DIRTY $ARROWS_GIT_FG_DIRTY
     fi
 
     local ahead behind
